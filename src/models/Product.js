@@ -1,0 +1,22 @@
+const { DataTypes } = require('sequelize');
+module.exports = sequelize => sequelize.define('Product', {
+  id:             { type: DataTypes.BIGINT.UNSIGNED, primaryKey: true, autoIncrement: true },
+  item_id:        { type: DataTypes.BIGINT.UNSIGNED, allowNull: true },
+  slug:           { type: DataTypes.STRING(160), unique: true, allowNull: false },
+  sku:            { type: DataTypes.STRING(60), unique: true, allowNull: true },
+  name:           { type: DataTypes.STRING(200), allowNull: false },
+  name_ar:        { type: DataTypes.STRING(200) },
+  short_desc:     { type: DataTypes.STRING(500) },
+  short_desc_ar:  { type: DataTypes.STRING(500) },
+  description:    { type: DataTypes.TEXT },
+  description_ar: { type: DataTypes.TEXT },
+  category_id:    { type: DataTypes.INTEGER.UNSIGNED, allowNull: true },
+  price:          { type: DataTypes.DECIMAL(18,3), defaultValue: 0 },
+  compare_price:  { type: DataTypes.DECIMAL(18,3), allowNull: true },
+  currency_code:  { type: DataTypes.CHAR(3), defaultValue: 'KWD' },
+  stock_qty:      { type: DataTypes.DECIMAL(18,3), defaultValue: 0 },
+  is_featured:    { type: DataTypes.TINYINT, defaultValue: 0 },
+  is_published:   { type: DataTypes.TINYINT, defaultValue: 1 },
+  created_at:     { type: DataTypes.DATE },
+  updated_at:     { type: DataTypes.DATE },
+}, { tableName: 'products' });

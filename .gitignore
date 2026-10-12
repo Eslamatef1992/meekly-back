@@ -1,0 +1,25 @@
+node_modules/
+dist/
+build/
+.env
+.env.local
+.env.*.local
+*.log
+npm-debug.log*
+yarn-debug.log*
+.DS_Store
+.idea/
+.vscode/
+coverage/
+.cache/
+storage/
+uploads/
+tmp/
+
+# Real company financial data — NOT published publicly
+src/migrations/010_fy2020_import.sql
+src/migrations/011_fy2020_vouchers.sql
+src/migrations/012_fy2020_vouchers_complete.sql
+*.sql.gz
+*.dump
+*.bak

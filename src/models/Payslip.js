@@ -1,0 +1,25 @@
+const { DataTypes } = require('sequelize');
+
+module.exports = sequelize => sequelize.define('Payslip', {
+  id:                 { type: DataTypes.BIGINT.UNSIGNED, primaryKey: true, autoIncrement: true },
+  payroll_run_id:     { type: DataTypes.BIGINT.UNSIGNED, allowNull: false },
+  employee_id:        { type: DataTypes.BIGINT.UNSIGNED, allowNull: false },
+  branch_id:          { type: DataTypes.INTEGER.UNSIGNED, allowNull: false },
+  period_year:        { type: DataTypes.INTEGER.UNSIGNED, allowNull: false },
+  period_month:       { type: DataTypes.TINYINT.UNSIGNED, allowNull: false },
+  working_days:       { type: DataTypes.DECIMAL(6,2), defaultValue: 26 },
+  paid_days:          { type: DataTypes.DECIMAL(6,2), defaultValue: 26 },
+  basic_salary:       { type: DataTypes.DECIMAL(18,3), defaultValue: 0 },
+  total_allowances:   { type: DataTypes.DECIMAL(18,3), defaultValue: 0 },
+  total_overtime:     { type: DataTypes.DECIMAL(18,3), defaultValue: 0 },
+  gross_pay:          { type: DataTypes.DECIMAL(18,3), defaultValue: 0 },
+  total_deductions:   { type: DataTypes.DECIMAL(18,3), defaultValue: 0 },
+  pifss_employee:     { type: DataTypes.DECIMAL(18,3), defaultValue: 0 },
+  pifss_employer:     { type: DataTypes.DECIMAL(18,3), defaultValue: 0 },
+  net_pay:            { type: DataTypes.DECIMAL(18,3), defaultValue: 0 },
+  unpaid_leave_days:  { type: DataTypes.DECIMAL(6,2), defaultValue: 0 },
+  unpaid_leave_amount:{ type: DataTypes.DECIMAL(18,3), defaultValue: 0 },
+  notes:              { type: DataTypes.STRING(500) },
+  created_at:         { type: DataTypes.DATE },
+  updated_at:         { type: DataTypes.DATE },
+}, { tableName: 'payslips' });
