@@ -13,6 +13,7 @@ const Account = require('./Account')(sequelize);
 const Voucher = require('./Voucher')(sequelize);
 const VoucherLine = require('./VoucherLine')(sequelize);
 const GlEntry = require('./GlEntry')(sequelize);
+const FinancialUploadJob = require('./FinancialUploadJob')(sequelize);
 
 // HR
 const Department = require('./Department')(sequelize);
@@ -77,6 +78,11 @@ Account.belongsTo(Currency, { foreignKey: 'currency_id' });
 
 Voucher.belongsTo(Currency, { foreignKey: 'currency_id' });
 Voucher.belongsTo(FiscalPeriod, { foreignKey: 'fiscal_period_id' });
+
+// Financial Uploads
+FinancialUploadJob.belongsTo(FiscalPeriod, { foreignKey: 'fiscal_period_id' });
+FinancialUploadJob.belongsTo(Branch, { foreignKey: 'branch_id' });
+FinancialUploadJob.belongsTo(User, { as: 'uploader', foreignKey: 'uploaded_by' });
 Voucher.hasMany(VoucherLine, { foreignKey: 'voucher_id', as: 'lines' });
 VoucherLine.belongsTo(Voucher, { foreignKey: 'voucher_id' });
 VoucherLine.belongsTo(Account, { foreignKey: 'account_id' });
@@ -157,7 +163,7 @@ module.exports = {
   sequelize,
   Branch,
   User, Role, Permission, Currency, FiscalPeriod,
-  Account, Voucher, VoucherLine, GlEntry,
+  Account, Voucher, VoucherLine, GlEntry, FinancialUploadJob,
   Department, Employee, LeaveType, LeaveRequest,
   SalaryComponent, EmployeeSalaryComponent,
   PayrollRun, Payslip, PayslipLine,

@@ -28,6 +28,7 @@ const productRoutes = require('./routes/product.routes');
 const orderRoutes = require('./routes/order.routes');
 const customerAuthRoutes = require('./routes/customerAuth.routes');
 const lookupRoutes = require('./routes/lookup.routes');
+const financialUploadRoutes = require('./routes/financialUpload.routes');
 
 const app = express();
 
@@ -66,6 +67,7 @@ app.use('/api/lookups', lookupRoutes);
 app.use('/api/finance/accounts', accountRoutes);
 app.use('/api/finance/vouchers', voucherRoutes);
 app.use('/api/finance/reports', reportRoutes);
+app.use('/api/finance/uploads', financialUploadRoutes);
 
 // hr
 app.use('/api/hr/employees', employeeRoutes);
