@@ -76,10 +76,10 @@ PREPARE stmt FROM @ddl; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 -- ---------------------------------------------------------------------------
 -- 3. Permissions for the new module (super_admin bypasses; other roles need these)
 -- ---------------------------------------------------------------------------
-INSERT IGNORE INTO permissions (code, module, label) VALUES
-  ('finance.uploads.view',   'finance', 'View financial uploads'),
-  ('finance.uploads.create', 'finance', 'Upload financial file'),
-  ('finance.uploads.rollback','finance','Rollback financial upload');
+INSERT IGNORE INTO permissions (code, name, module) VALUES
+  ('finance.uploads.view',    'View financial uploads',    'finance'),
+  ('finance.uploads.create',  'Upload financial file',     'finance'),
+  ('finance.uploads.rollback','Rollback financial upload', 'finance');
 
 -- Give super_admin role (if a roles<->permissions table exists) the new perms
 -- Falls back silently if the join table isn't present in this schema.

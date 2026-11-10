@@ -48,7 +48,7 @@ exports.get = async (req, res, next) => {
 exports.create = async (req, res, next) => {
   try {
     if (!req.file) throw HttpError.badRequest('File is required (field: file)');
-    const { fiscal_period_id, upload_type, branch_id } = req.body;
+    const { fiscal_period_id, upload_type, company_id, branch_id } = req.body;
     if (!fiscal_period_id) throw HttpError.badRequest('fiscal_period_id is required');
     if (!['chart_of_accounts', 'vouchers'].includes(upload_type)) {
       throw HttpError.badRequest('upload_type must be "chart_of_accounts" or "vouchers"');
@@ -59,14 +59,18 @@ exports.create = async (req, res, next) => {
 
     const job = await FinancialUploadJob.create({
       fiscal_period_id: period.id,
-      branch_id: branch_id || null,
+      company_id: company_id || null,
+      branch_id:  branch_id  || null,
       upload_type,
       original_filename: req.file.originalname,
       stored_filename:   req.file.filename,
       file_size:         req.file.size,
       status: 'queued',
       uploaded_by: req.user.sub,
-      options_json: JSON.stringify({ branch_id: branch_id || null }),
+      options_json: JSON.stringify({
+        company_id: company_id || null,
+        branch_id:  branch_id  || null,
+      }),
     });
 
     // Fire-and-forget — the queue drains in the background.

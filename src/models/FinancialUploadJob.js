@@ -3,6 +3,7 @@ const { DataTypes } = require('sequelize');
 module.exports = sequelize => sequelize.define('FinancialUploadJob', {
   id:                { type: DataTypes.BIGINT.UNSIGNED, primaryKey: true, autoIncrement: true },
   fiscal_period_id:  { type: DataTypes.INTEGER.UNSIGNED, allowNull: false },
+  company_id:        { type: DataTypes.INTEGER.UNSIGNED, allowNull: true },
   branch_id:         { type: DataTypes.INTEGER.UNSIGNED, allowNull: true },
   upload_type:       { type: DataTypes.ENUM('chart_of_accounts', 'vouchers'), allowNull: false },
   original_filename: { type: DataTypes.STRING(255), allowNull: false },
